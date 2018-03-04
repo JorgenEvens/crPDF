@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const _omitBy = require('lodash/omitBy');
 const _isNil = require('lodash/isNil');
 const _set = require('lodash/set');
