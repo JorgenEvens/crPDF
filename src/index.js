@@ -41,7 +41,6 @@ const defaults = {
 
 module.exports = async function toPDF(config) {
     config = u(config, defaults);
-    console.log(config);
 
     const { input } = config;
 
