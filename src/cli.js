@@ -1,0 +1,45 @@
+const _omitBy = require('lodash/omitBy');
+const _isNil = require('lodash/isNil');
+const _set = require('lodash/set');
+
+const program = require('commander');
+const pkg = require('../package.json');
+
+const toPDF = require('./index');
+const { parseUnit, parseOrientation, parsePaperSize } = require('./cli-validation');
+
+const options = {};
+const map = (loc, parser = (v => v)) => (v) => v && _set(options, loc, parser(v));
+
+const mapUnit = (loc) => map(loc, parseUnit);
+const mapLandscape = map('landscape', v => parseOrientation(v) === 'landscape');
+const mapBoolean = (loc, invert) => (v) => {
+    v = /^true|1|yes|y$/.test(v+'');
+    return invert ? !v : v;
+}
+
+program
+    .version(pkg.version)
+    .arguments('[input] [output]')
+
+    .option('-B, --margin-bottom <unitreal>', 'Set the page bottom margin', mapUnit('margin.bottom'))
+    .option('-L, --margin-left <unitreal>', 'Set the page left margin (default 10mm)', mapUnit('margin.left'))
+    .option('-R, --margin-right <unitreal>', 'Set the page right margin (default 10mm)', mapUnit('margin.right'))
+    .option('-T, --margin-top <unitreal>', 'Set the page top margin', mapUnit('margin.top'))
+
+    .option('-O, --orientation <orientation>', 'Set orientation to Landscape or Portrait (default Portrait)', mapLandscape)
+    .option('-s, --page-size <Size>', 'Set paper size to: A4, Letter, etc. (default A4)', map('format'))
+    .option('--page-height <unitreal>', 'Page height', mapUnit('height'))
+    .option('--page-width <unitreal>', 'Page width', mapUnit('width'))
+
+    .option('--background', 'Do print background', mapBoolean('printBackground'))
+    .option('--no-background', 'Do not print background', mapBoolean('printBackground', true))
+
+    .action((input, output) => {
+        map('input')(input);
+        map('path')(output);
+    });
+
+program.parse(process.argv);
+
+toPDF(options);
