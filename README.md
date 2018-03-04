@@ -5,7 +5,13 @@
 ![dependencies](https://img.shields.io/david/JorgenEvens/crPDF.svg)
 ![dev dependencies](https://img.shields.io/david/dev/JorgenEvens/crPDF.svg)
 
-Print HTML to PDF using [puppeteer](https://github.com/GoogleChrome/puppeteer) with a [wkhtmltopdf](https://wkhtmltopdf.org/) compatible CLI.
+Print HTML to PDF using [Puppeteer](https://github.com/GoogleChrome/puppeteer) with a [wkhtmltopdf](https://wkhtmltopdf.org/) compatible CLI.
+
+## Motivation
+
+While creating print versions of HTML on modern browsers is not fun, it is not an impossible feat. Getting HTML to PDF tools to render correctly on the other hand is very challenging. That is why this project leverages [Puppeteer](https://github.com/GoogleChrome/puppeteer) (Headless Chrome/Chromium) to generate PDFs from HTML. If you can get your layout to work using print preview on Chrome you will be good to go using this library.
+
+Many of us have relied on wkhtmltopdf over the years, and it has great library support. To make transitioning as easy as possible crPDF matches the CLI options which allows you to use crPDF as a drop-in replacement.
 
 ## Installation
 
