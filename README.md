@@ -5,7 +5,7 @@
 ![dependencies](https://img.shields.io/david/JorgenEvens/crPDF.svg)
 ![dev dependencies](https://img.shields.io/david/dev/JorgenEvens/crPDF.svg)
 
-Print web to PDF using [puppeteer](https://github.com/GoogleChrome/puppeteer) with a [wkhtmltopdf](https://wkhtmltopdf.org/) compatible CLI.
+Print HTML to PDF using [puppeteer](https://github.com/GoogleChrome/puppeteer) with a [wkhtmltopdf](https://wkhtmltopdf.org/) compatible CLI.
 
 ## Installation
 

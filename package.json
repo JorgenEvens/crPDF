@@ -1,7 +1,7 @@
 {
   "name": "crpdf",
   "version": "0.1.0",
-  "description": "Print web to PDF using puppeteer with a wkhtmltopdf compatible CLI",
+  "description": "Print HTML to PDF using puppeteer with a wkhtmltopdf compatible CLI",
   "main": "index.js",
   "bin": {
     "wkhtmltopdf": "./src/cli.js",
