@@ -5,7 +5,7 @@
   "main": "index.js",
   "bin": {
     "wkhtmltopdf": "./src/cli.js",
-    "crPDF": "./src/cli.js"
+    "crpdf": "./src/cli.js"
   },
   "scripts": {
     "build": "pkg --out-path build .",
