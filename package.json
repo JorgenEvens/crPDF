@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "ssh://git@gitlab.evens.eu:2205/JorgenEvens/crPDF.git"
+    "url": "ssh://git@github.com:JorgenEvens/crPDF.git"
   },
   "keywords": [
     "PDF",
