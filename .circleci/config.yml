@@ -1,0 +1,19 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: node
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - dependencies-{{ checksum "package.json" }}
+            - dependencies
+      - run: npm install
+      - save_cache:
+          key: dependencies-{{ checksum "package.json" }}-{{ .BuildNum }}
+          paths:
+            - node_modules
+      - run: npm run build
+      - store_artifacts:
+          path: build
