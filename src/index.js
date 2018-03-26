@@ -33,6 +33,7 @@ const defaults = {
     path: 'output.pdf',
     format: 'A4',
     landscape: false,
+    printBackground: true,
     margin: {
         left: '10mm',
         right: '10mm'
