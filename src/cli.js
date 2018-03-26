@@ -15,10 +15,9 @@ const map = (loc, parser = (v => v)) => (v) => v && _set(options, loc, parser(v)
 
 const mapUnit = (loc) => map(loc, parseUnit);
 const mapLandscape = map('landscape', v => parseOrientation(v) === 'landscape');
-const mapBoolean = (loc, invert) => (v) => {
-    v = /^true|1|yes|y$/.test(v+'');
-    return invert ? !v : v;
-}
+const mapBoolean = (loc, flagName) => () => {
+    _set(options, loc, !process.argv.includes('--no-' + flagName));
+};
 
 program
     .version(pkg.version)
@@ -34,8 +33,7 @@ program
     .option('--page-height <unitreal>', 'Page height', mapUnit('height'))
     .option('--page-width <unitreal>', 'Page width', mapUnit('width'))
 
-    .option('--background', 'Do print background', mapBoolean('printBackground'))
-    .option('--no-background', 'Do not print background', mapBoolean('printBackground', true))
+    .option('--no-background, --background', 'Print background', mapBoolean('printBackground', 'background'))
 
     .action((input, output) => {
         map('input')(input);
