@@ -32,6 +32,7 @@ program
     .option('-s, --page-size <Size>', 'Set paper size to: A4, Letter, etc. (default A4)', map('format'))
     .option('--page-height <unitreal>', 'Page height', mapUnit('height'))
     .option('--page-width <unitreal>', 'Page width', mapUnit('width'))
+    .option('--page-ranges <range>', 'Page ranges to print, e.g., "1-5, 8, 11-13" (default all)', map('pageRanges'))
 
     .option('--no-background, --background', 'Print background', mapBoolean('printBackground', 'background'))
 
