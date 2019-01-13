@@ -60,11 +60,14 @@ crpdf --help
     -s, --page-size <Size>           Set paper size to: A4, Letter, etc. (default A4)
     --page-height <unitreal>         Page height
     --page-width <unitreal>          Page width
+    --page-ranges <range>            Page ranges to print, e.g., "1-5, 8, 11-13" (default all)
     --background                     Do print background
     --no-background                  Do not print background
     -h, --help                       output usage information
 
 ```
+
+Note, `--page-ranges` is not available in `wkhtmltopdf` and thus not backwards compatible.
 
 ## Contributing
 
