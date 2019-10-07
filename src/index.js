@@ -26,7 +26,10 @@ async function getBrowserInstance() {
         await fetcher.download(revision);
     }
 
-    return await puppeteer.launch({ executablePath });
+    return await puppeteer.launch({
+        executablePath,
+        args: ['--no-sandbox', '--disable-setuid-sandbox']
+    });
 }
 
 const defaults = {
