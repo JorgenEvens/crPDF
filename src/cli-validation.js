@@ -19,8 +19,13 @@ function parsePaperSize(value) {
         return value;
 }
 
+function parseNumber(value) {
+    return parseFloat(value);
+}
+
 module.exports = {
     parseUnits,
     parseOrientation,
-    parsePaperSize
+    parsePaperSize,
+    parseNumber
 }
