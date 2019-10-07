@@ -49,4 +49,7 @@ program
 
 program.parse(process.argv);
 
-toPDF(options);
+toPDF(options).catch(err => {
+    console.error(err.message);
+    process.exit(1);
+});
