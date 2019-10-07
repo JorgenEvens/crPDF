@@ -34,6 +34,7 @@ async function getBrowserInstance() {
 
 const defaults = {
     path: 'output.pdf',
+    type: 'pdf',
     format: 'A4',
     landscape: false,
     printBackground: true,
@@ -51,14 +52,21 @@ module.exports = async function toPDF(config) {
     let url = input;
     if (!/^[a-z0-9-_]+:\/\//i.test(input + '')) {
         const html = input ? fs.readFileSync(input).toString('utf8') : await readStdin();
-        url = `data:text/html,${html}`;
+        url = `data:text/html;base64,${new Buffer(html, 'utf8').toString('base64')}`;
     }
 
     // Download the browser
     const browser = await getBrowserInstance();
     const page = await browser.newPage();
     await page.goto(url, { waitUntil: 'networkidle0' });
-    await page.pdf(config);
+
+    if (config.viewport)
+        await page.setViewport(config.viewport);
+
+    if (config.type == 'pdf')
+        await page.pdf(config);
+    else
+        await page.screenshot(config);
 
     await browser.close();
 };

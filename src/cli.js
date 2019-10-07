@@ -8,12 +8,13 @@ const program = require('commander');
 const pkg = require('../package.json');
 
 const toPDF = require('./index');
-const { parseUnit, parseOrientation, parsePaperSize } = require('./cli-validation');
+const { parseUnit, parseOrientation, parsePaperSize, parseNumber } = require('./cli-validation');
 
 const options = {};
 const map = (loc, parser = (v => v)) => (v) => v && _set(options, loc, parser(v));
 
 const mapUnit = (loc) => map(loc, parseUnit);
+const mapNumber = (loc) => map(loc, parseNumber);
 const mapLandscape = map('landscape', v => parseOrientation(v) === 'landscape');
 const mapBoolean = (loc, flagName) => () => {
     _set(options, loc, !process.argv.includes('--no-' + flagName));
@@ -35,6 +36,11 @@ program
     .option('--page-ranges <range>', 'Page ranges to print, e.g., "1-5, 8, 11-13" (default all)', map('pageRanges'))
 
     .option('--no-background, --background', 'Print background', mapBoolean('printBackground', 'background'))
+
+    .option('--file-type <type>', 'Format', map('type'))
+    .option('--image-scale <scale>', 'Scale', mapNumber('viewport.deviceScaleFactor'))
+    .option('--image-height <height>', 'Height', mapNumber('viewport.height'))
+    .option('--image-width <width>', 'Height', mapNumber('viewport.width'))
 
     .action((input, output) => {
         map('input')(input);
