@@ -51,7 +51,7 @@ module.exports = async function toPDF(config) {
 
     let url = input;
     if (!/^[a-z0-9-_]+:\/\//i.test(input + '')) {
-        const html = input ? fs.readFileSync(input).toString('utf8') : await readStdin();
+        const html = (input && input != '-') ? fs.readFileSync(input).toString('utf8') : await readStdin();
         url = `data:text/html;base64,${new Buffer(html, 'utf8').toString('base64')}`;
     }
 
